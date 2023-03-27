@@ -24,7 +24,7 @@ RewriteRule ^file/(.*)$ proxy.php [L]
 
 ```nginx
 location /file/ {
-    try_files $uri $uri/ /proxy.php?$query_string;
+    rewrite ^/file/(.*)$ /proxy.php?$query_string;
 }
 ```
 
