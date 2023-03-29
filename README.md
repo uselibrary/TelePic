@@ -40,3 +40,8 @@ location /file/ {
 
 - 图片上传至 Telegraph 服务器，无法保证私密性及安全性
 - 图片上传成功后，需要等待 Telegraph 服务器处理图片才能获取到代理后的图片链接。
+
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/Fangsongs/TelePic.svg)](https://starchart.cc/Fangsongs/TelePic)
