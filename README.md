@@ -6,8 +6,8 @@
 
 1. 将代码部署到 Web 服务器上。
 2. 配置服务器环境（Apache 或 Nginx），使 `/file/` 路径映射到 `proxy.php` 文件。
-3. 打开 `index.html` 文件即可使用。
-4. 依赖于 cURL 扩展支持，即 `php-curl`
+3. 检查PHP拓展 cURL （即 `php-curl`）是否开启。
+4. 打开 `index.html` 文件即可使用。
 
 ### Apache 配置示例
 
