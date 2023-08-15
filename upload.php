@@ -1,5 +1,11 @@
 <?php
 
+// Connect to the SQLite database
+$db = new SQLite3('/path/to/uploads.db');
+
+// Create the uploads table if it doesn't exist
+$db->exec('CREATE TABLE IF NOT EXISTS uploads (id INTEGER PRIMARY KEY, url TEXT)');
+
 if (isset($_FILES['image'])) {
   $image = $_FILES['image'];
   
@@ -30,6 +36,13 @@ if (isset($_FILES['image'])) {
 
   $json = json_decode($response, true);
   if ($json && isset($json[0]['src'])) {
+    // 将图片 URL 存入数据库
+    $url = 'https://telegra.ph' . $json[0]['src'];
+    // Save the URL to the database
+    $stmt = $db->prepare('INSERT INTO uploads (url) VALUES (:url)');
+    $stmt->bindValue(':url', $url, SQLITE3_TEXT);
+    $stmt->execute();
+
     // 在页面上输出原始图片 URL 和代理后图片 URL
     echo 'https://telegra.ph' . $json[0]['src'] . "\n";
     echo 'https://' . $_SERVER['HTTP_HOST']. $json[0]['src'];

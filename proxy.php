@@ -1,4 +1,7 @@
 <?php
+// Connect to the SQLite database
+$db = new SQLite3('/path/to/uploads.db');
+
 // 获取原始 URL 参数
 $url = $_SERVER['REQUEST_URI'];
 
@@ -6,6 +9,19 @@ $url = $_SERVER['REQUEST_URI'];
 if (strpos($url, '/file/') === 0) {
   // 构造图片 URL
   $image_url = 'https://telegra.ph' . $url;
+
+  // Get the requested URL
+  //$requestedUrl = 'https://telegra.ph' . $_SERVER['PATH_INFO'];
+    
+  // Check if the requested URL is in the database， TRUE： continue， FALSE： 404
+  $stmt = $db->prepare('SELECT url FROM uploads WHERE url = :url');
+  $stmt->bindValue(':url', $image_url, SQLITE3_TEXT);
+  $result = $stmt->execute();
+
+  if ($result->fetchArray() === false) {
+    http_response_code(404);
+    die('File not found');
+  }
 
   // 发送代理请求并输出响应内容
   $options = array(

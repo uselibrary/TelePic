@@ -7,7 +7,9 @@
 1. 将代码部署到 Web 服务器上。
 2. 配置服务器环境（Apache 或 Nginx），使 `/file/` 路径映射到 `proxy.php` 文件。
 3. 检查PHP拓展 cURL （即 `php-curl`）是否开启。
-4. 打开 `index.html` 文件即可使用。
+4. 检查sqlite3是否安装，以Debian为例，安装方法为`apt install sqlite3`。
+5. 检查PHP拓展 sqlite （即 `php-sqlite`）是否开启。
+6. 打开 `index.html` 文件即可使用。
 
 ### Apache 配置示例
 
